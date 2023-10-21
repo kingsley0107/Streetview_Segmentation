@@ -23,7 +23,19 @@ Developed based on [**semantic-segmentation-pytorch**](https://github.com/CSAILV
 
 本仓库与街景爬取代码[streetview_images_crawler](https://github.com/kingsley0107/streetview_images_crawler "streetview_images_crawler")配合食用进行大规模批量化处理效果更佳
 
-![result](./images/output.png)
+### Performance:
+
+- 提取 buildings:
+
+![result](./readme/building.png)
+
+- 提取 Trees:
+
+![tree](./readme/tree.png)
+
+- 提取 Sky:
+
+![sky](./readme/sky.png)
 
 ### Startup:
 
