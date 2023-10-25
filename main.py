@@ -9,6 +9,7 @@ from tqdm import tqdm
 class IndexCalculator:
     def __init__(self) -> None:
         self.indics_values = {
+            "GSV_ID": [],
             "SBI": [],
             "SLI": [],
             "SVI": [],
@@ -26,6 +27,7 @@ class IndexCalculator:
         pil_image = image_to_pil(path)
         singleton_batch, output_size = img_to_tensor(pil_image)
         result = predict(singleton_batch, output_size)
+        self.indics_values['GSV_ID'].append(pano_id)
         for idx in ['SBI', 'SLI', 'SVI', 'TFI', 'PSI', 'SI', 'GVI', 'SAI']:
             self.indics_values[idx].append(cal_normal_index(result, idx))
         self.indics_values['AI'].append(cal_AI(result))
@@ -47,4 +49,5 @@ if __name__ == '__main__':
             panoid = os.path.splitext(image)[0]
             calculator.gen_idx(panoid)
     res = calculator.release_all()
+    res.to_csv(r'indices_result.csv')
     print(res)
