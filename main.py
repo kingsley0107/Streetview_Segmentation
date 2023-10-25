@@ -4,6 +4,7 @@ from NetWork.model import predict
 from reference.index_formula import cal_normal_index, cal_AI, cal_EPI
 import os
 from tqdm import tqdm
+from config.config import IMG_PATH, OUTPUT_FILE
 
 
 class IndexCalculator:
@@ -23,7 +24,7 @@ class IndexCalculator:
         }
 
     def gen_idx(self, pano_id):
-        path = rf'C:\Users\20191\Desktop\streetview_images_crawler_Google\2022_GSV\{pano_id}.jpg'
+        path = rf'{IMG_PATH}\{pano_id}.jpg'
         pil_image = image_to_pil(path)
         singleton_batch, output_size = img_to_tensor(pil_image)
         result = predict(singleton_batch, output_size)
@@ -41,13 +42,10 @@ class IndexCalculator:
 
 if __name__ == '__main__':
     calculator = IndexCalculator()
-    for image in tqdm(
-            os.listdir(
-                r'C:\Users\20191\Desktop\streetview_images_crawler_Google\2022_GSV'
-            )):
+    for image in tqdm(os.listdir(IMG_PATH)):
         if image.endswith('.jpg'):
             panoid = os.path.splitext(image)[0]
             calculator.gen_idx(panoid)
     res = calculator.release_all()
-    res.to_csv(r'indices_result.csv')
+    res.to_csv(OUTPUT_FILE)
     print(res)
