@@ -30,9 +30,18 @@ class IndexCalculator:
         result = predict(singleton_batch, output_size)
         self.indics_values['GSV_ID'].append(pano_id)
         for idx in ['SBI', 'SLI', 'SVI', 'TFI', 'PSI', 'SI', 'GVI', 'SAI']:
-            self.indics_values[idx].append(cal_normal_index(result, idx))
-        self.indics_values['AI'].append(cal_AI(result))
-        self.indics_values['EPI'].append(cal_EPI(result))
+            try:
+                self.indics_values[idx].append(cal_normal_index(result, idx))
+            except Exception:
+                self.indics_values[idx].append('error')
+        try:
+            self.indics_values['AI'].append(cal_AI(result))
+        except Exception:
+            self.indics_values['AI'].append('error')
+        try:
+            self.indics_values['EPI'].append(cal_EPI(result))
+        except Exception:
+            self.indics_values['EPI'].append('error')
 
     def release_all(self):
         import pandas as pd
