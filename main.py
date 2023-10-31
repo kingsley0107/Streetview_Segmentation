@@ -51,10 +51,14 @@ class IndexCalculator:
 
 if __name__ == '__main__':
     calculator = IndexCalculator()
-    for image in tqdm(os.listdir(IMG_PATH)):
-        if image.endswith('.jpg'):
-            panoid = os.path.splitext(image)[0]
-            calculator.gen_idx(panoid)
-    res = calculator.release_all()
-    res.to_csv(OUTPUT_FILE)
+    try:
+        for image in tqdm(os.listdir(IMG_PATH)):
+            if image.endswith('.jpg'):
+                panoid = os.path.splitext(image)[0]
+                calculator.gen_idx(panoid)
+    except Exception as e:
+        print(f"An unexpected error occurred: {e}")
+    finally:
+        res = calculator.release_all()
+        res.to_csv(OUTPUT_FILE)
     print(res)

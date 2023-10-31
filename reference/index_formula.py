@@ -28,9 +28,9 @@ def cal_normal_index(pred, index_type):
 def cal_EPI(pred):
     # 围合感知指数 enclosure perception index
     EPI_Numerator_pixels = cal_pixels(pred, 'EPI')
-    EPI_Denominator_pixels = cal_pixels(pred, "EPI_D")
+    # EPI_Denominator_pixels = cal_pixels(pred, "EPI_D")
     try:
-        res = round(EPI_Numerator_pixels / EPI_Denominator_pixels, 2)
+        res = round(EPI_Numerator_pixels / len(pred.flatten()), 2)
     except Exception:
         res = 999
     return res
@@ -39,9 +39,9 @@ def cal_EPI(pred):
 def cal_AI(pred):
     # 通行性指数 accessibility index
     AI_Numerator_pixels = cal_pixels(pred, 'AI')
-    AI_Denominator_pixels = cal_pixels(pred, "AI_D")
+    # AI_Denominator_pixels = cal_pixels(pred, "AI_D")
     try:
-        res = round(AI_Numerator_pixels / AI_Denominator_pixels, 2)
+        res = round(AI_Numerator_pixels / len(pred.flatten()), 2)
     except Exception:
         res = 999
     return res
