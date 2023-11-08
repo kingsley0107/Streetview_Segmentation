@@ -18,30 +18,31 @@ def cal_normal_index(pred, index_type):
     # 空间边界指数 spatial boundary index
     # boundary pixels / total pixels
     if index_type not in [
-            'SBI', 'SLI', 'SVI', 'TFI', 'PSI', 'SI', 'GVI', 'SAI'
+            'Person', 'Bike', 'HeavyV', 'LightV', 'Facade', 'WindowOpening',
+            'Road', 'Sidewalk', 'StreetFurniture', 'GreeneryTree',
+            'GreeneryGrass', 'Sky', 'Nature'
     ]:
         raise TypeError('index type error')
     target_numerator_pixels = cal_pixels(pred, index_type)
     return round(target_numerator_pixels / len(pred.flatten()), 2)
 
 
-def cal_EPI(pred):
-    # 围合感知指数 enclosure perception index
-    EPI_Numerator_pixels = cal_pixels(pred, 'EPI')
-    # EPI_Denominator_pixels = cal_pixels(pred, "EPI_D")
-    try:
-        res = round(EPI_Numerator_pixels / len(pred.flatten()), 2)
-    except Exception:
-        res = 999
-    return res
+# def cal_EPI(pred):
+#     # 围合感知指数 enclosure perception index
+#     EPI_Numerator_pixels = cal_pixels(pred, 'EPI')
+#     # EPI_Denominator_pixels = cal_pixels(pred, "EPI_D")
+#     try:
+#         res = round(EPI_Numerator_pixels / len(pred.flatten()), 2)
+#     except Exception:
+#         res = 999
+#     return res
 
-
-def cal_AI(pred):
-    # 通行性指数 accessibility index
-    AI_Numerator_pixels = cal_pixels(pred, 'AI')
-    # AI_Denominator_pixels = cal_pixels(pred, "AI_D")
-    try:
-        res = round(AI_Numerator_pixels / len(pred.flatten()), 2)
-    except Exception:
-        res = 999
-    return res
+# def cal_AI(pred):
+#     # 通行性指数 accessibility index
+#     AI_Numerator_pixels = cal_pixels(pred, 'AI')
+#     # AI_Denominator_pixels = cal_pixels(pred, "AI_D")
+#     try:
+#         res = round(AI_Numerator_pixels / len(pred.flatten()), 2)
+#     except Exception:
+#         res = 999
+#     return res
